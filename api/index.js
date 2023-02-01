@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
   res.send("Nothing to see here");
 });
 
+//Registro
 app.get(config.API_BASE + "/register", (req, res) => {
   if (req.query.user && req.query.password) {
     if (
@@ -52,6 +53,30 @@ app.get(config.API_BASE + "/register", (req, res) => {
     }
   } else {
     res.send({ success: false });
+  }
+});
+
+//Login
+app.get(config.API_BASE + "/login", (req, res) => {
+  //Comprobamos que existan ambos campos en la query
+  if (req.query.user && req.query.password) {
+    //Filtramos el usuario y password
+    const userFound = db.data.users.filter(
+      (item) =>
+        item.user.toLowerCase() == req.query.user.toLowerCase() &&
+        item.password == sha256(req.query.password).toString()
+    );
+    //Si existe un resultado, hacemos login devolviendo el user_id
+    if (userFound.length > 0) {
+      res.send({ user_id: userFound[0].user_id, success: true });
+      console.log(`Access Granted ${req.query.user}.`);
+    } else {
+      res.send({ success: false });
+      console.log("Access Denied.");
+    }
+  } else {
+    res.send({ success: false });
+    console.log("Access Denied.");
   }
 });
 
