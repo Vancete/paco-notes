@@ -17,7 +17,10 @@ const adapter = new JSONFile(dbFile);
 const db = new Low(adapter);
 
 const initializeDb = async () => {
-  db.data = db.data || { users: [], notes: [] };
+  db.data = db.data || {};
+  db.data.users = db.data.users || [];
+  db.data.notes = db.data.notes || [];
+
   console.log("--- DB Initialized ---");
   await db.write();
 };
@@ -97,15 +100,9 @@ app.get(config.API_BASE + "/get-notes", (req, res) => {
     const notesFound = db.data.notes.filter(
       (item) => item.user_id == req.query.user_id
     );
-    //Si existen notas las devolvemos
-    if (notesFound.length > 0) {
-      //{data: [{user_id_: XXXXX, note_id: XXXXX, text: 'XXXXXX'},...], success: true}
-      res.send({ data: [], success: true });
-      console.log(`User notes have been retrieved: ${req.query.user_id}.`);
-    } else {
-      res.send({ success: false });
-      console.log("There are no user notes.");
-    }
+    //Devolvemos las notas
+    res.send({ data: notesFound, success: true });
+    console.log(`User notes have been retrieved: ${req.query.user_id}.`);
   } else {
     res.send({ success: false });
     console.log("There are no notes.");
