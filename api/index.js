@@ -17,7 +17,7 @@ const adapter = new JSONFile(dbFile);
 const db = new Low(adapter);
 
 const initializeDb = async () => {
-  db.data = db.data || { users: [] };
+  db.data = db.data || { users: [], notes: [] };
   console.log("--- DB Initialized ---");
   await db.write();
 };
@@ -77,6 +77,38 @@ app.get(config.API_BASE + "/login", (req, res) => {
   } else {
     res.send({ success: false });
     console.log("Access Denied.");
+  }
+});
+
+//Get-Notes
+//Estructura Notas
+//  notes : [
+//    {
+//      note_id: "",
+//      user_id: "",
+//      text: ""
+//    },
+//  ]
+
+app.get(config.API_BASE + "/get-notes", (req, res) => {
+  //Comprobamos que exista el campo user_id en la query
+  if (req.query.user_id) {
+    //Filtramos las notas creadas por el user_id recuperado
+    const notesFound = db.data.notes.filter(
+      (item) => item.user_id == req.query.user_id
+    );
+    //Si existen notas las devolvemos
+    if (notesFound.length > 0) {
+      //{data: [{user_id_: XXXXX, note_id: XXXXX, text: 'XXXXXX'},...], success: true}
+      res.send({ data: [], success: true });
+      console.log(`User notes have been retrieved: ${req.query.user_id}.`);
+    } else {
+      res.send({ success: false });
+      console.log("There are no user notes.");
+    }
+  } else {
+    res.send({ success: false });
+    console.log("There are no notes.");
   }
 });
 
