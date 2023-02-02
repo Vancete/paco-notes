@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
-import axios from "axios";
-import config from "../../config";
+import { apiLogin } from "../../actions";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const apiLogin = () => {
-    axios
-      .get(`${config.API_BASE}/login?user=${username}&password=${password}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="login">
@@ -44,11 +35,24 @@ const Login = () => {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              apiLogin();
+              apiLogin(username, password)
+                .then((response) => {
+                  console.log(response);
+                  if (response.data.success) {
+                    localStorage.setItem("userId", response.data.user_id);
+                    navigate("/notes");
+                  } else {
+                    setError(true);
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             }}
           >
             Login
           </button>
+          {error && <label>Login Incorrecto</label>}
         </form>
       </div>
     </div>
