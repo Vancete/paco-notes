@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
 
 //Registro
 app.get(config.API_BASE + "/register", (req, res) => {
+  console.log(req.query);
   if (req.query.user && req.query.password) {
     if (
       db.data.users.filter((item) => item.user == req.query.user).length > 0
@@ -95,14 +96,15 @@ app.get(config.API_BASE + "/login", (req, res) => {
 
 app.get(config.API_BASE + "/get-notes", (req, res) => {
   //Comprobamos que exista el campo user_id en la query
-  if (req.query.user_id) {
+  const userId = req.query.user_id;
+  const userFound = db.data.users.filter((item) => item.user_id == userId);
+
+  if (userId && userFound.length > 0) {
     //Filtramos las notas creadas por el user_id recuperado
-    const notesFound = db.data.notes.filter(
-      (item) => item.user_id == req.query.user_id
-    );
+    const notesFound = db.data.notes.filter((item) => item.user_id == userId);
     //Devolvemos las notas
     res.send({ data: notesFound, success: true });
-    console.log(`User notes have been retrieved: ${req.query.user_id}.`);
+    console.log(`User notes have been retrieved: ${userId}.`);
   } else {
     res.send({ success: false });
     console.log("There are no notes.");
