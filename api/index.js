@@ -107,7 +107,36 @@ app.get(config.API_BASE + "/get-notes", (req, res) => {
     console.log(`User notes have been retrieved: ${userId}.`);
   } else {
     res.send({ success: false });
-    console.log("There are no notes.");
+    console.log("Access Denied.");
+  }
+});
+
+app.get(config.API_BASE + "/upsert-note", (req, res) => {
+  const userId = req.query.user_id;
+  const userFound = db.data.users.filter((item) => item.user_id == userId);
+  const noteId = req.query.note_id;
+  const noteFound = db.data.notes.filter((item) => item.note_id == noteId);
+
+  if (userId && userFound.length > 0) {
+    if (noteId && noteFound.length > 0) {
+      // Si viene noteId actualizamos la nota
+      noteFound[0].text = req.query.text;
+      res.send({ note_id: noteId, success: true });
+      db.write();
+    } else {
+      const newNoteId = nanoid()
+      db.data.notes.push({
+        note_id: newNoteId,
+        user_id: userId,
+        text: req.query.text,
+        date: Date.now()
+      })
+      res.send({ note_id: newNoteId, success: true });
+      db.write();
+    }
+  } else {
+    res.send({ success: false });
+    console.log("Access Denied.");
   }
 });
 
