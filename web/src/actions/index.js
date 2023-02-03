@@ -7,4 +7,10 @@ const apiLogin = (username, password) => {
   );
 };
 
-export { apiLogin };
+const apiRegister = (username, email, password) => {
+  return axios.get(
+    `${config.API_BASE}/register?user=${username}&email=${email}&password=${password}`
+  );
+};
+
+export { apiLogin, apiRegister };
