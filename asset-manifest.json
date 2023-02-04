@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.fd64fc3a.css",
-    "main.js": "/static/js/main.a5454d4a.js",
-    "static/js/787.21197143.chunk.js": "/static/js/787.21197143.chunk.js",
-    "static/media/login_img.jpg": "/static/media/login_img.1c7b8b6a0c4848fef679.jpg",
-    "index.html": "/index.html",
-    "main.fd64fc3a.css.map": "/static/css/main.fd64fc3a.css.map",
-    "main.a5454d4a.js.map": "/static/js/main.a5454d4a.js.map",
-    "787.21197143.chunk.js.map": "/static/js/787.21197143.chunk.js.map"
+    "main.css": "/paco-notes/static/css/main.e0f523ef.css",
+    "main.js": "/paco-notes/static/js/main.e626a993.js",
+    "static/js/787.21197143.chunk.js": "/paco-notes/static/js/787.21197143.chunk.js",
+    "static/media/login_img.jpg": "/paco-notes/static/media/login_img.1c7b8b6a0c4848fef679.jpg",
+    "index.html": "/paco-notes/index.html",
+    "main.e0f523ef.css.map": "/paco-notes/static/css/main.e0f523ef.css.map",
+    "main.e626a993.js.map": "/paco-notes/static/js/main.e626a993.js.map",
+    "787.21197143.chunk.js.map": "/paco-notes/static/js/787.21197143.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fd64fc3a.css",
-    "static/js/main.a5454d4a.js"
+    "static/css/main.e0f523ef.css",
+    "static/js/main.e626a993.js"
   ]
 }
