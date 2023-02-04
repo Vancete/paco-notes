@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/paco-notes/static/css/main.452a1f7d.css",
-    "main.js": "/paco-notes/static/js/main.7c9320ea.js",
+    "main.css": "/paco-notes/static/css/main.966541e1.css",
+    "main.js": "/paco-notes/static/js/main.5c8a4435.js",
     "static/js/787.21197143.chunk.js": "/paco-notes/static/js/787.21197143.chunk.js",
     "static/media/login_img.jpg": "/paco-notes/static/media/login_img.1c7b8b6a0c4848fef679.jpg",
     "index.html": "/paco-notes/index.html",
-    "main.452a1f7d.css.map": "/paco-notes/static/css/main.452a1f7d.css.map",
-    "main.7c9320ea.js.map": "/paco-notes/static/js/main.7c9320ea.js.map",
+    "main.966541e1.css.map": "/paco-notes/static/css/main.966541e1.css.map",
+    "main.5c8a4435.js.map": "/paco-notes/static/js/main.5c8a4435.js.map",
     "787.21197143.chunk.js.map": "/paco-notes/static/js/787.21197143.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.452a1f7d.css",
-    "static/js/main.7c9320ea.js"
+    "static/css/main.966541e1.css",
+    "static/js/main.5c8a4435.js"
   ]
 }
