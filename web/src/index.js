@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import UserAuth from "./containers/UserAuth";
 import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,9 +13,10 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/notes" element={<Login />} />
+        <Route path="/" element={<UserAuth />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/notes" element={<Login />} />
       </Routes>
     </Router>
   </React.StrictMode>
