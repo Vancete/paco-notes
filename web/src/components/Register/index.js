@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import "../../containers/UserAuth/styles.scss";
 
-import { apiLogin } from "../../actions";
+import { apiRegister } from "../../actions";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  const loginAction = (e) => {
+  const registerAction = (e) => {
     e.preventDefault();
-    apiLogin(username, password)
+    apiRegister(username, email, password)
       .then((response) => {
         console.log(response);
         if (response.data.success) {
-          localStorage.setItem("userId", response.data.user_id);
-          navigate("/notes");
+          navigate("/login");
         } else {
           setError(true);
         }
@@ -32,8 +33,14 @@ const Login = () => {
       <input
         type="text"
         id="user"
-        placeholder="Dirección de correo electrónico"
+        placeholder="Nombre de usuario"
         onChange={(e) => setUsername(e.target.value)}
+      ></input>
+      <input
+        type="text"
+        id="email"
+        placeholder="Dirección de correo electrónico"
+        onChange={(e) => setEmail(e.target.value)}
       ></input>
       <input
         type="password"
@@ -41,17 +48,25 @@ const Login = () => {
         placeholder="Contraseña"
         onChange={(e) => setPassword(e.target.value)}
       ></input>
+      <input
+        type="password"
+        id="repeat-password"
+        placeholder="Repetir contraseña"
+        onChange={(e) => setRepassword(e.target.value)}
+      ></input>
+      {password !== repassword && <label>Las contraseñas no coinciden</label>}
       <button
         type="submit"
         onClick={(e) => {
-          loginAction(e);
+          registerAction(e);
         }}
+        disabled={!password || password !== repassword}
       >
-        Iniciar sesión
+        Registro
       </button>
-      {error && <label>Inicio de sesión incorrecto</label>}
+      {error && <label>Registro Incorrecto</label>}
     </>
   );
 };
 
-export default Login;
+export default Register;
