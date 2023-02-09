@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../../containers/UserAuth/styles.scss";
 
 import { apiRegister } from "../../actions";
-import { useNavigate } from "react-router-dom";
 
 const Register = ({ viewLogin }) => {
   const [username, setUsername] = useState("");
@@ -10,7 +9,6 @@ const Register = ({ viewLogin }) => {
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
 
   const registerAction = (e) => {
     e.preventDefault();

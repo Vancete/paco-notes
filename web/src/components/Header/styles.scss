@@ -1,0 +1,41 @@
+.header {
+   @apply w-full border border-b flex items-center px-4;
+    height: 64px;
+    gap: 16px;
+
+    .logo {
+        @apply rounded-lg text-white font-semibold flex justify-center items-center select-none;
+        width: 48px;
+        height: 48px;
+        background-color: #665ae2;
+    }
+
+    .search {
+        @apply border bg-gray-100 rounded-md pl-4;
+        height: 48px;
+        width: 480px;
+        transition: all 0.1s;
+
+        &:focus{
+            outline: 2px solid #665ae2;
+        }
+    }
+
+    .add {
+        @apply rounded-full text-white font-semibold text-4xl flex justify-center items-center select-none cursor-pointer;
+        height: 42px;
+        width: 42px;
+        background-color: #665ae2;
+        padding-bottom: 8px;
+
+        &:hover{
+            background-color: #48419c;
+        }
+    }
+
+    .avatar {
+        @apply rounded-full bg-gray-400 text-2xl text-gray-600 flex justify-center items-center select-none ml-auto;
+        height: 48px;
+        width: 48px;
+    }
+}

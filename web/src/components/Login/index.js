@@ -32,7 +32,7 @@ const Login = () => {
       <input
         type="text"
         id="user"
-        placeholder="Dirección de correo electrónico"
+        placeholder="Usuario o dirección de correo electrónico"
         onChange={(e) => setUsername(e.target.value)}
       ></input>
       <input

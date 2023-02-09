@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 
 import UserAuth from "./containers/UserAuth";
-import reportWebVitals from "./reportWebVitals";
+import Notes from "./containers/Notes";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -13,13 +13,8 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<UserAuth />} />
-        <Route path="/notes" element={<div></div>} />
+        <Route path="/notes" element={<Notes />} />
       </Routes>
     </Router>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
