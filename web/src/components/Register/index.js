@@ -4,7 +4,7 @@ import "../../containers/UserAuth/styles.scss";
 import { apiRegister } from "../../actions";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ viewLogin }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ const Register = () => {
       .then((response) => {
         console.log(response);
         if (response.data.success) {
-          navigate("/login");
+          viewLogin();
         } else {
           setError(true);
         }
