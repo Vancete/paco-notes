@@ -12,6 +12,22 @@ const Register = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  const registerAction = (e) => {
+    e.preventDefault();
+    apiRegister(username, email, password)
+      .then((response) => {
+        console.log(response);
+        if (response.data.success) {
+          navigate("/login");
+        } else {
+          setError(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <input
@@ -38,32 +54,13 @@ const Register = () => {
         placeholder="Repetir contraseña"
         onChange={(e) => setRepassword(e.target.value)}
       ></input>
-      {password !== repassword ? (
-        <label>Las contraseñas no coinciden</label>
-      ) : (
-        ""
-      )}
+      {password !== repassword && <label>Las contraseñas no coinciden</label>}
       <button
         type="submit"
         onClick={(e) => {
-          e.preventDefault();
-          if (password === repassword) {
-            apiRegister(username, email, password)
-              .then((response) => {
-                console.log(response);
-                if (response.data.success) {
-                  navigate("/login");
-                } else {
-                  setError(true);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            setError(true);
-          }
+          registerAction(e);
         }}
+        disabled={!password || password !== repassword}
       >
         Registro
       </button>

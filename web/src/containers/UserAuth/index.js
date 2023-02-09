@@ -21,14 +21,14 @@ const UserAuth = () => {
       <div className="form-container">
         <form className="form">
           <div className="links">
-            <label className={login ? "selected" : ""} onClick={viewLogin}>
+            <label className={login && "selected"} onClick={viewLogin}>
               Iniciar sesión
             </label>
-            <label className={login ? "" : "selected"} onClick={viewRegister}>
+            <label className={!login && "selected"} onClick={viewRegister}>
               Únete
             </label>
-            {login ? <Login /> : <Register />}
           </div>
+          {login ? <Login /> : <Register />}
         </form>
       </div>
     </div>

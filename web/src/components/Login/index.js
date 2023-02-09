@@ -10,6 +10,23 @@ const Login = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  const loginAction = (e) => {
+    e.preventDefault();
+    apiLogin(username, password)
+      .then((response) => {
+        console.log(response);
+        if (response.data.success) {
+          localStorage.setItem("userId", response.data.user_id);
+          navigate("/notes");
+        } else {
+          setError(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <input
@@ -27,20 +44,7 @@ const Login = () => {
       <button
         type="submit"
         onClick={(e) => {
-          e.preventDefault();
-          apiLogin(username, password)
-            .then((response) => {
-              console.log(response);
-              if (response.data.success) {
-                localStorage.setItem("userId", response.data.user_id);
-                navigate("/notes");
-              } else {
-                setError(true);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          loginAction(e);
         }}
       >
         Iniciar sesión
