@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import Login from "./components/Login";
-import Register from "./components/Register";
+
 import UserAuth from "./containers/UserAuth";
 import reportWebVitals from "./reportWebVitals";
 
@@ -14,9 +13,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<UserAuth />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/notes" element={<Login />} />
+        <Route path="/notes" element={<div></div>} />
       </Routes>
     </Router>
   </React.StrictMode>

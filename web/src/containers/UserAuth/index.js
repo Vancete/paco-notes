@@ -28,7 +28,7 @@ const UserAuth = () => {
               Únete
             </label>
           </div>
-          {login ? <Login /> : <Register />}
+          {login ? <Login /> : <Register viewLogin={viewLogin} />}
         </form>
       </div>
     </div>
