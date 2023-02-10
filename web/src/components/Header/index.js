@@ -1,12 +1,14 @@
 import React from "react";
 import "./styles.scss";
 
-const Header = () => {
+const Header = ({ viewModal }) => {
   return (
     <div className="header">
       <div className="logo">PN</div>
       <input className="search" type="text" placeholder="Buscar..." />
-      <div className="add">+</div>
+      <div className="add" onClick={viewModal}>
+        +
+      </div>
       <div className="avatar">PA</div>
     </div>
   );
