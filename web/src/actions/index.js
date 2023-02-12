@@ -13,4 +13,10 @@ const apiRegister = (username, email, password) => {
   );
 };
 
-export { apiLogin, apiRegister };
+const apiGetNotes = () => {
+  const userId = localStorage.getItem("userId");
+
+  return axios.get(`${config.API_BASE}/get-notes?user_id=${userId}`);
+};
+
+export { apiLogin, apiRegister, apiGetNotes };

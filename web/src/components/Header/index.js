@@ -6,7 +6,7 @@ const Header = ({ viewModal }) => {
     <div className="header">
       <div className="logo">PN</div>
       <input className="search" type="text" placeholder="Buscar..." />
-      <div className="add" onClick={viewModal}>
+      <div className="add" id="addNote" onClick={viewModal}>
         +
       </div>
       <div className="avatar">PA</div>
