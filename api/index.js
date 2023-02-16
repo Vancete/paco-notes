@@ -100,7 +100,9 @@ app.get(config.API_BASE + "/get-notes", (req, res) => {
 
   if (userId && userFound) {
     //Filtramos las notas creadas por el user_id recuperado
-    const notesFound = db.data.notes.filter((item) => item.user_id == userId);
+    const notesFound = db.data.notes
+      .filter((item) => item.user_id == userId)
+      .sort((a, b) => b.date - a.date);
     //Devolvemos las notas y el nombre de usuario
     res.send({ user: userFound.user, data: notesFound, success: true });
     console.log(`User notes have been retrieved: ${userId}.`);

@@ -1,24 +1,34 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
-const Modal = ({ viewModal, textNote, editMode }) => {
+const Modal = ({ textNote, upsertNote, noteId, setModal }) => {
   const [colorNote, setColorNote] = useState("wh");
+  const [text, setText] = useState(textNote || "");
 
   const changeColorNote = (e) => {
     const newColor = e.target.className.slice(-2);
     setColorNote(newColor);
   };
 
+  const closeModal = (e) => {
+    if (e.target.className === "modal") {
+      setModal(false);
+    }
+  };
+
   return (
-    <div className="modal" id="modal" onClick={viewModal}>
+    <div className="modal" onClick={(e) => closeModal(e)}>
       <div className="modal-content">
         <div className="modal-header">
-          <label>{editMode ? "Editar Nota" : "Nueva nota"}</label>
-          <button>GUARDAR</button>
+          <label>{noteId ? "Editar Nota" : "Nueva nota"}</label>
+          <button onClick={() => upsertNote(text, noteId)}>GUARDAR</button>
         </div>
-        <textarea className={`modal-note ${colorNote}`} placeholder="...">
-          {textNote ? textNote : ""}
-        </textarea>
+        <textarea
+          className={`modal-note ${colorNote}`}
+          placeholder="..."
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+        ></textarea>
       </div>
       <div className="colors">
         <button className="color-wh" onClick={changeColorNote}></button>
