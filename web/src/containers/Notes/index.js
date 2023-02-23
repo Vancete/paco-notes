@@ -4,7 +4,7 @@ import "./styles.scss";
 import Header from "../../components/Header";
 import Note from "../../components/Note";
 import Modal from "../../components/Modal";
-import { apiGetNotes, apiUpsertNote } from "../../actions";
+import { apiDeleteNote, apiGetNotes, apiUpsertNote } from "../../actions";
 
 const Notes = () => {
   const [modal, setModal] = useState(false);
@@ -13,18 +13,33 @@ const Notes = () => {
   const [noteId, setNoteId] = useState(null);
 
   const getNotesAction = () => {
-    apiGetNotes().then((res) => {
-      setNotesArray(res.data.data);
-    });
+    apiGetNotes()
+      .then((res) => {
+        setNotesArray(res.data.data);
+      })
+      .catch((e) => console.log(e));
   };
 
   const getUpsertNoteAction = (text, noteId = null) => {
-    apiUpsertNote(text, noteId).then((res) => {
-      if (res.data.success) {
-        setModal(!modal);
-        getNotesAction();
-      }
-    });
+    apiUpsertNote(text, noteId)
+      .then((res) => {
+        if (res.data.success) {
+          setModal(!modal);
+          getNotesAction();
+        }
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const deteleNoteAction = (noteId) => {
+    apiDeleteNote(noteId)
+      .then((res) => {
+        if (res.data.success) {
+          setModal(!modal);
+          getNotesAction();
+        }
+      })
+      .catch((e) => console.log(e));
   };
 
   const editNote = (text, noteId = null) => {
@@ -43,6 +58,7 @@ const Notes = () => {
         <Modal
           textNote={textNote}
           upsertNote={getUpsertNoteAction}
+          deleteNote={deteleNoteAction}
           noteId={noteId}
           setModal={setModal}
         />

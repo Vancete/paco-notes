@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
-const Modal = ({ textNote, upsertNote, noteId, setModal }) => {
+const Modal = ({ textNote, upsertNote, deleteNote, noteId, setModal }) => {
   const [colorNote, setColorNote] = useState("wh");
   const [text, setText] = useState(textNote || "");
 
@@ -29,6 +29,9 @@ const Modal = ({ textNote, upsertNote, noteId, setModal }) => {
           onChange={(e) => setText(e.target.value)}
           value={text}
         ></textarea>
+        <button className="modal-delete" onClick={() => deleteNote(noteId)}>
+          Eliminar Nota
+        </button>
       </div>
       <div className="colors">
         <button className="color-wh" onClick={changeColorNote}></button>

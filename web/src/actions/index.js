@@ -27,4 +27,11 @@ const apiUpsertNote = (text, noteId = null) => {
   );
 };
 
-export { apiLogin, apiRegister, apiGetNotes, apiUpsertNote };
+const apiDeleteNote = (noteId) => {
+  const userId = localStorage.getItem("userId");
+  return axios.get(
+    `${config.API_BASE}/delete-note?user_id=${userId}&note_id=${noteId}`
+  );
+};
+
+export { apiLogin, apiRegister, apiGetNotes, apiUpsertNote, apiDeleteNote };
