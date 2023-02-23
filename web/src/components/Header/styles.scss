@@ -34,8 +34,23 @@
     }
 
     .avatar {
-        @apply rounded-full bg-gray-400 text-2xl text-gray-600 flex justify-center items-center select-none ml-auto;
+        @apply rounded-full bg-gray-400 text-2xl text-gray-600 flex justify-center items-center select-none ml-auto relative;
         height: 48px;
         width: 48px;
+
+        .menu {
+            @apply absolute right-0 top-full border rounded-lg bg-white shadow-lg mt-1 overflow-hidden;
+
+            &>*{
+                @apply text-base w-max py-1 px-3;
+            }
+
+            button {
+                &:hover{
+                    background-color: #48419c;
+                    color: white;
+                }
+            }
+        }
     }
 }

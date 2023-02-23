@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 
 import Login from "../../components/Login";
 import Register from "../../components/Register";
+import { useNavigate } from "react-router-dom";
 
 const UserAuth = () => {
   const [login, setLogin] = useState(true);
+  const navigate = useNavigate();
 
   const viewLogin = () => {
     setLogin(true);
@@ -14,6 +16,12 @@ const UserAuth = () => {
   const viewRegister = () => {
     setLogin(false);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      navigate("/notes");
+    }
+  }, []);
 
   return (
     <div className="user-auth">

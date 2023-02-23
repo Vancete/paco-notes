@@ -5,17 +5,26 @@ import Header from "../../components/Header";
 import Note from "../../components/Note";
 import Modal from "../../components/Modal";
 import { apiDeleteNote, apiGetNotes, apiUpsertNote } from "../../actions";
+import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const [modal, setModal] = useState(false);
   const [textNote, setTextNote] = useState(false);
   const [notesArray, setNotesArray] = useState([]);
   const [noteId, setNoteId] = useState(null);
+  const [search, setSearch] = useState("");
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   const getNotesAction = () => {
     apiGetNotes()
       .then((res) => {
-        setNotesArray(res.data.data);
+        if (res.data.success) {
+          setNotesArray(res.data.data);
+          setUser(res.data.user);
+        } else {
+          closeSession();
+        }
       })
       .catch((e) => console.log(e));
   };
@@ -48,6 +57,11 @@ const Notes = () => {
     setNoteId(noteId);
   };
 
+  const closeSession = () => {
+    localStorage.removeItem("userId");
+    navigate("/");
+  };
+
   useEffect(() => {
     getNotesAction();
   }, []);
@@ -63,12 +77,22 @@ const Notes = () => {
           setModal={setModal}
         />
       )}
-      <Header editNote={editNote} />
+      <Header
+        editNote={editNote}
+        search={search}
+        setSearch={setSearch}
+        closeSession={closeSession}
+        user={user}
+      />
       <div className="notes-body">
         <div className="notes-content">
-          {notesArray.map((item) => (
-            <Note note={item} editNote={editNote} />
-          ))}
+          {notesArray
+            .filter((note) =>
+              note.text.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item) => (
+              <Note note={item} editNote={editNote} />
+            ))}
         </div>
       </div>
     </div>
